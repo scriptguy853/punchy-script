@@ -1,0 +1,43 @@
+UserInputService = game:GetService("UserInputService")
+local IsOnMobile = table.find({
+	Enum.Platform.IOS,
+	Enum.Platform.Android
+}, UserInputService:GetPlatform())
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Window = Fluent:CreateWindow({
+	Title = "punch script",
+	SubTitle = "LMAO",
+	TabWidth = 160,
+	Size = UDim2.fromOffset(580, 460),
+	Acrylic = false,
+	Theme = "Dark",
+	MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local oneshot = Window:AddTab({
+	Title = "One Tap",
+	Icon = "globe"
+})
+oneshot:AddButton({
+	Title = "Main one tap script",
+	Description = "One taps the enemies (have to be nearby)",
+	Callback = function()
+    	local args = {
+    [1] = 1100000000,
+    [2] = 1000000
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Punch"):FireServer(unpack(args))
+	
+    end
+})
+oneshot:AddButton({
+	Title = "Fast Strength",
+	Description = "Spams a remote to give u a lot of strength",
+	Callback = function()
+while wait() do
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("UpdateStrength"):FireServer()
+end
+    end
+})
